@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlbjat6yc550p"]
+
+[ext_resource type="Script" path="res://scenes/win.gd" id="1_4g3wk"]
+[ext_resource type="Texture2D" uid="uid://cg7ebgkno858j" path="res://sprites/Win.png" id="1_f5kfa"]
+[ext_resource type="AudioStream" uid="uid://cpfedx8xcbwtv" path="res://music/SpaceCRT.wav" id="2_2dkhi"]
+[ext_resource type="Script" path="res://scenes/WinMusic.gd" id="4_aen3l"]
+[ext_resource type="Shader" path="res://shaders/ctr.gdshader" id="4_new8q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w1ts0"]
+shader = ExtResource("4_new8q")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(2048, 1792)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 5.0
+shader_parameter/roll_variation = 3.0
+shader_parameter/distort_intensity = 0.02
+shader_parameter/noise_opacity = 0.25
+shader_parameter/noise_speed = 2.5
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.02
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.2
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[node name="Win" type="Node2D"]
+script = ExtResource("1_4g3wk")
+
+[node name="WinScreen" type="Sprite2D" parent="."]
+position = Vector2(128, 112)
+texture = ExtResource("1_f5kfa")
+
+[node name="WinMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_2dkhi")
+script = ExtResource("4_aen3l")
+
+[node name="CTR" type="CanvasLayer" parent="."]
+scale = Vector2(6.4, 5.6)
+transform = Transform2D(6.4, 0, 0, 5.6, 0, 0)
+
+[node name="CTRColor" type="ColorRect" parent="CTR"]
+material = SubResource("ShaderMaterial_w1ts0")
+offset_right = 40.0
+offset_bottom = 40.0

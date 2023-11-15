@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://difi6xyk2v0r1"]
+
+[ext_resource type="Script" path="res://scenes/test.gd" id="1_vaaao"]
+[ext_resource type="AudioStream" uid="uid://gd5fkmxn3o64" path="res://sounds/victoryCRT.wav" id="2_dub5b"]
+[ext_resource type="Texture2D" uid="uid://c1ua25mn5pifl" path="res://sprites/splash/GodotSplash.png" id="2_e4b5d"]
+[ext_resource type="Script" path="res://scenes/SplashAudio.gd" id="3_oxsfw"]
+[ext_resource type="Shader" path="res://shaders/ctr.gdshader" id="3_u6xue"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dr6nq"]
+shader = ExtResource("3_u6xue")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(2048, 1792)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 5.0
+shader_parameter/roll_variation = 3.0
+shader_parameter/distort_intensity = 0.02
+shader_parameter/noise_opacity = 0.25
+shader_parameter/noise_speed = 2.5
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.02
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.2
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[node name="Splash" type="Node2D"]
+script = ExtResource("1_vaaao")
+
+[node name="SplashSprite" type="Sprite2D" parent="."]
+position = Vector2(128, 112)
+texture = ExtResource("2_e4b5d")
+
+[node name="SplashAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dub5b")
+script = ExtResource("3_oxsfw")
+
+[node name="CTR" type="CanvasLayer" parent="."]
+scale = Vector2(6.4, 5.6)
+transform = Transform2D(6.4, 0, 0, 5.6, 0, 0)
+
+[node name="CTRColor" type="ColorRect" parent="CTR"]
+material = SubResource("ShaderMaterial_dr6nq")
+offset_right = 40.0
+offset_bottom = 40.0

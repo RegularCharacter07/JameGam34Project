@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://48408csruy60"]
+
+[ext_resource type="Script" path="res://scenes/win.gd" id="1_1i7h8"]
+[ext_resource type="Texture2D" uid="uid://cuitnri4iqkxx" path="res://sprites/lose.png" id="2_jsplo"]
+[ext_resource type="AudioStream" uid="uid://dto4v848dt5x5" path="res://music/DarkMusicCRT.wav" id="3_nh6wi"]
+[ext_resource type="Script" path="res://scenes/WinMusic.gd" id="4_krd14"]
+[ext_resource type="Shader" path="res://shaders/ctr.gdshader" id="5_y73pb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c76aj"]
+shader = ExtResource("5_y73pb")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(2048, 1792)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 5.0
+shader_parameter/roll_variation = 3.0
+shader_parameter/distort_intensity = 0.02
+shader_parameter/noise_opacity = 0.25
+shader_parameter/noise_speed = 2.5
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.02
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.2
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[node name="lose" type="Node2D"]
+script = ExtResource("1_1i7h8")
+
+[node name="losescreen" type="Sprite2D" parent="."]
+position = Vector2(128, 112)
+texture = ExtResource("2_jsplo")
+
+[node name="losemusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nh6wi")
+script = ExtResource("4_krd14")
+
+[node name="CTR" type="CanvasLayer" parent="."]
+scale = Vector2(6.4, 5.6)
+transform = Transform2D(6.4, 0, 0, 5.6, 0, 0)
+
+[node name="CTRColor" type="ColorRect" parent="CTR"]
+material = SubResource("ShaderMaterial_c76aj")
+offset_right = 40.0
+offset_bottom = 40.0
